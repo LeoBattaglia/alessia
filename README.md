@@ -1,5 +1,5 @@
 # Alessia
 
-Alessia contains many Database-Functions for MySQL like Connector, Installer or Client.
+TypeScript-Framework for Web-Applications on node.js
 
 **Not usable at the moment. Please check again later.**
