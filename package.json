@@ -15,6 +15,6 @@
         "typescript": "^4.3.2"
     },
     "dependencies": {
-        "selina": "^0.0.4"
+        "selina": "^0.1.0"
     }
 }
