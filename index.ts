@@ -1,7 +1,8 @@
 //Constants
+const builder = require("./lib/builder")
 const selina = require("selina");
 const server = new selina.Server(false, 0, response);
-const p = server.getPrompt();
+//const p = server.getPrompt();
 
 //Start Server
 server.init();
@@ -10,5 +11,5 @@ server.start();
 
 //Functions
 function response(req:Request):string{
-    return "RESPONSE";
+    return builder.response(req);
 }
