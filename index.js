@@ -1,7 +1,7 @@
 //Constants
-var builder = require("./lib/builder");
-var selina = require("selina");
-var server = new selina.Server(false, 0, response);
+const builder = require("./lib/builder");
+const selina = require("selina");
+const server = new selina.Server(false, 0, response);
 //const p = server.getPrompt();
 //Start Server
 server.init();
