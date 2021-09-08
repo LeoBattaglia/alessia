@@ -2,7 +2,7 @@
 import {URLObject} from "./urlObject";
 import {HTMLElement, HTMLSourceCode} from "derya";
 import * as sys from "samara";
-import * as config from "./config.json";
+import * as config from "./res/config.json";
 import {Response} from "selina";
 
 //Constants
@@ -74,6 +74,7 @@ function buildMeta():HTMLSourceCode{
 }
 
 function buildPage():Response{
+    console.log("BP: " + uo.page);
     sc = new HTMLSourceCode();
     sc.addDoctype();
     let tag:HTMLElement = sc.openTag("html");

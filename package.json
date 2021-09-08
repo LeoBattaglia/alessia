@@ -22,6 +22,6 @@
     "dependencies": {
         "derya": "^0.1.30",
         "samara": "^0.1.16",
-        "selina": "^0.1.12"
+        "selina": "^0.1.13"
     }
 }
