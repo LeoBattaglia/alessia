@@ -1,3 +1,6 @@
+import  * as filetypes from "./res/filetypes.json"
+import * as sys from "samara";
+
 //Classes
 export class URLObject{
     //Declarations
@@ -13,8 +16,32 @@ export class URLObject{
         this.cutURL();
     }
 
-    //Functions
-    cutURL(){
+    //Methods
+    containsPara(para:string, value:string):Boolean{
+        for(let line of this.paras){
+            if(line.indexOf("=") > -1){
+                if(line.indexOf("=") > 0){
+                    let paras:string[] = line.split("=");
+                    if(sys.isNull(value)){
+                        if(para === paras[0]){
+                            return true;
+                        }
+                    }else{
+                        if(para === paras[0] && value === paras[1]){
+                            return true;
+                        }
+                    }
+                }
+            }else{
+                if(para === line){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    cutURL():void{
         if(this.url.indexOf("?") < 0){
             this.page = this.url;
         }else{
@@ -26,8 +53,19 @@ export class URLObject{
                 this.paras = paras.split("&");
             }
         }
+        //console.log("RRR: " + this.page);
     }
 
+    isFile():Boolean{
+        for(let type of filetypes.types){
+            if(this.page.indexOf("." + type) === this.page.length - type.length - 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Get-Methods
     get page():string{
         return this._page;
     }
@@ -40,6 +78,7 @@ export class URLObject{
         return this._url;
     }
 
+    //Set-Methods
     set page(value:string){
         this._page = value;
     }
