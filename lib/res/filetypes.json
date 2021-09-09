@@ -1,9 +1,28 @@
 {
     "types":[
-        "ico",
-        "jpg",
-        "pdf",
-        "png",
-        "ttf"
+        {
+            "name":"ico",
+            "type": "image/x-icon"
+        },
+        {
+            "name":"jpg",
+            "type": "image/jpeg"
+        },
+        {
+            "name":"pdf",
+            "type": "application/pdf"
+        },
+        {
+            "name":"png",
+            "type": "image/png"
+        },
+        {
+            "name":"svg",
+            "type": "image/svg+xml"
+        },
+        {
+            "name":"ttf",
+            "type": "font/ttf"
+        }
     ]
 }

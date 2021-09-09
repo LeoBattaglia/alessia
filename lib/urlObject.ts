@@ -58,7 +58,7 @@ export class URLObject{
 
     isFile():Boolean{
         for(let type of filetypes.types){
-            if(this.page.indexOf("." + type) === this.page.length - type.length - 1){
+            if(this.page.indexOf("." + type.name) === this.page.length - type.name.length - 1){
                 return true;
             }
         }

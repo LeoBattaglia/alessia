@@ -4,6 +4,7 @@ import {HTMLElement, HTMLSourceCode} from "derya";
 import * as sys from "samara";
 import * as config from "./res/config.json";
 import {Response} from "selina";
+import  * as filetypes from "./res/filetypes.json"
 
 //Constants
 const fs = require("fs");
@@ -27,25 +28,24 @@ function buildBody():HTMLSourceCode{
     tag = sc.openTag("div");
     tag.addStyle("height", "100%");
     tag.addStyle("width", "100%");
-    //TODO: All
+
+    //TODO: Load Page-Content
 
     sc.closeTag("div");
     if(uo.containsPara("admin", "1")){
         tag = sc.openTag("div");
         //tag.addAttribute("class", "font-effect-neon")
-        tag.addStyle("background-color", "SlateGray");
+        tag.addStyle("background-color", "#334c81");
         tag.addStyle("display", "flex");
         tag.addStyle("flex-direction", "column");
         tag.addStyle("height", "calc(100% - 2em)");
         tag.addStyle("padding", "1em");
         tag.addStyle("width", "18em");
-        tag = sc.openTag("a");
-        tag.addStyle("font-family", "Alessia");
-        tag.addStyle("font-size", "50pt");
-        sc.addContent("Alessia")
-        sc.closeTag("a");
+        tag = sc.addTag("img");
+        tag.addStyle("width", "100%");
+        tag.addAttribute("src", "Alessia.svg");
 
-        //TODO: All
+        //TODO: Finish Admin-Panel
 
         sc.closeTag("div");
     }else if(uo.containsPara("admin", "0")){
@@ -74,7 +74,6 @@ function buildMeta():HTMLSourceCode{
 }
 
 function buildPage():Response{
-    console.log("BP: " + uo.page);
     sc = new HTMLSourceCode();
     sc.addDoctype();
     let tag:HTMLElement = sc.openTag("html");
@@ -83,16 +82,9 @@ function buildPage():Response{
     sc.openTag("head");
     sc.addSourceCode(buildTitle());
     sc.addSourceCode(buildMeta());
-
-    sc.openTag("style");
-    sc.addContent("@font-face{font-family: \"Alessia\"; src: url(\"./lib/res/Apalu.ttf\");}")
-    //sc.addContent("@import url('https://fonts.googleapis.com/css?family=Muli|Unica+One|Roboto+Condensed&display=swap');")
-    //@import url('https://fonts.googleapis.com/css?family=Muli|Unica+One|Roboto+Condensed&display=swap');
-    sc.closeTag("style");
-
-    //tag = sc.addTag("link");
-    //tag.addAttribute("rel", "stylesheet");
-    //tag.addAttribute("href", "https://fonts.googleapis.com/css?family=Parisienne");
+    //sc.openTag("style");
+    //sc.addContent("@font-face{font-family: \"Alessia\"; src: url(\"/Apalu.ttf\");}")
+    //sc.closeTag("style");
     sc.closeTag("head");
     sc.addSourceCode(buildBody());
     sc.closeTag("html")
@@ -107,13 +99,25 @@ function buildTitle():HTMLSourceCode{
     return sc;
 }
 
+function getContentType(path:string):string{
+    let end = path.substr(path.lastIndexOf(".") + 1, path.length);
+    for(let type of filetypes.types){
+        if(end === type.name){
+            return type.type;
+        }
+    }
+    return undefined;
+}
+
 function getFile():Response{
-    console.log("FILE: " + uo.page);
     //let file:string = fs.readFileSync(uo.page);
+    let slash:string;
+    uo.page.substr(0, 1) === "/"? slash = "": slash="/";
+    let path:string = "./lib/res" + slash + uo.page;
+    return new Response(200, getContentType(path), fs.readFileSync(path));
 
     //TODO: All
 
-    return new Response(200, "text/plain", "TEST");
 }
 
 export function response(req:Request):Response{
