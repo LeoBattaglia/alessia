@@ -5,12 +5,18 @@
     "content_language": "de",
     "copyright": "jdev.ch",
     "description": "DESCRIPTION",
+    "developer_mode": true,
     "google_site_verification": "",
     "keywords": "KEYWORDS",
+    "loginTries": 3,
+    "page_login": "admin",
+    "page_pw": "1234",
     "page_topic": "Dienstleistungen",
     "publisher": "jdev.ch",
+    "removeSessionSeconds": 300,
     "revisit_after": "7 days",
     "robots": "index, follow",
     "title": "Alessia - Framework",
-    "viewport": "device-width, initial-scale=1.0"
+    "viewport": "device-width, initial-scale=1.0",
+    "websocket_port": 8080
 }

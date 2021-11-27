@@ -56,6 +56,13 @@ export class URLObject{
         //console.log("RRR: " + this.page);
     }
 
+    isCSS():Boolean{
+        if(this.page.indexOf(".css") === this.page.length - ".css".length){
+            return true;
+        }
+        return false;
+    }
+
     isFile():Boolean{
         for(let type of filetypes.types){
             if(this.page.indexOf("." + type.name) === this.page.length - type.name.length - 1){

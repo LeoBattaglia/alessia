@@ -9,6 +9,10 @@
             "type": "image/jpeg"
         },
         {
+            "name":"js",
+            "type": "text/javascript"
+        },
+        {
             "name":"pdf",
             "type": "application/pdf"
         },

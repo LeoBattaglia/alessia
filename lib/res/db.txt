@@ -1,0 +1,10 @@
+#table
+#name:	user
+#cell:	type:string;	    name:username;	        not_null:true
+#cell:	type:string;	    name:password;          not_null:true
+#cell:	type:int;	        name:admin
+#cell:	type:int;	        name:active
+#key:	type:unique;        name:main_index;	index:username
+#ins:   admin;              1234;       1;   1
+#create
+///////////////////////////////////////////////////////////////////////////////////////////////
