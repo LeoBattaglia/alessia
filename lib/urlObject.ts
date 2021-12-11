@@ -1,18 +1,19 @@
+//Imports
 import  * as filetypes from "./res/filetypes.json"
 import * as sys from "samara";
 
 //Classes
 export class URLObject{
     //Declarations
-    _page:string;
     _paras:string[];
+    _target:string;
     _url:string;
 
     //Constructor
     constructor(url){
-        this.page = "";
         this.paras = [];
-        this.url = url;
+        this.target = "";
+        this.url = url.trim().toLowerCase();
         this.cutURL();
     }
 
@@ -37,16 +38,16 @@ export class URLObject{
                     return true;
                 }
             }
-            return false;
         }
+        return false;
     }
 
     cutURL():void{
         if(this.url.indexOf("?") < 0){
-            this.page = this.url;
+            this.target = this.url;
         }else{
-            this.page = this.url.substr(0, this.url.indexOf("?"));
-            let paras:string = this.url.substr(this.url.indexOf("?") + 1, this.url.length);
+            this.target = this.url.substring(0, this.url.indexOf("?"));
+            let paras:string = this.url.substring(this.url.indexOf("?") + 1, this.url.length);
             if(paras.indexOf("&") < 0){
                 this.paras = [paras];
             }else{
@@ -56,16 +57,31 @@ export class URLObject{
         //console.log("RRR: " + this.page);
     }
 
-    isCSS():Boolean{
-        if(this.page.indexOf(".css") === this.page.length - ".css".length){
-            return true;
+    getContentType():string{
+        let end = this.target.substring(this.target.lastIndexOf(".") + 1, this.target.length);
+        for(let type of filetypes.types){
+            if(end === type.name){
+                return type.type;
+            }
         }
-        return false;
+        return undefined;
+    }
+
+    getFileType():string{
+        return this.target.substring(this.target.indexOf(".") + 1, this.target.length);
+    }
+
+    getTargetFile():string{
+        let file = this.target;
+        while(file.indexOf("/") > -1){
+            file = file.substring(file.indexOf("/") + 1, file.length);
+        }
+        return file;
     }
 
     isFile():Boolean{
         for(let type of filetypes.types){
-            if(this.page.indexOf("." + type.name) === this.page.length - type.name.length - 1){
+            if(this.target.indexOf("." + type.name) === this.target.length - type.name.length - 1){
                 return true;
             }
         }
@@ -73,12 +89,12 @@ export class URLObject{
     }
 
     //Get-Methods
-    get page():string{
-        return this._page;
-    }
-
     get paras():string[]{
         return this._paras;
+    }
+
+    get target():string{
+        return this._target;
     }
 
     get url():string{
@@ -86,12 +102,12 @@ export class URLObject{
     }
 
     //Set-Methods
-    set page(value:string){
-        this._page = value;
-    }
-
     set paras(values:string[]){
         this._paras = values;
+    }
+
+    set target(value:string){
+        this._target = value;
     }
 
     set url(value:string){

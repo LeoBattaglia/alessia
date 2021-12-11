@@ -1,0 +1,112 @@
+.alessia_button{
+    align-items: center;
+    border: 1px outset white;
+    border-radius: 44px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    user-select: none;
+    width: 44px;
+}
+
+.alessia_button:active{
+    border: 1px inset #cccccc;
+}
+
+.alessia_button:hover{
+    background-color: #202020;
+}
+
+#alessia_div_body{
+    background-color: #202020;
+    height: 100%;
+    width: 100%;
+}
+
+#alessia_div_admin{
+    background-color: #2b2b2b;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: Muli;
+    height: calc(100% - 1em);
+    padding: 0.5em;
+    row-gap: 0.5em;
+    width: 18em;
+    align-items: center;
+}
+
+#alessia_div_admin_panel{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 0.4em;
+    width: 100%;
+}
+
+.alessia_div_admin_panel_buttons{
+    column-gap: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.alessia_input_text{
+    background-color: #202020;
+    border: 1px inset #505050;
+    border-radius: 2em;
+    color: white;
+    height: 2em;
+    padding-left: 0.8em;
+    width: 80%;
+}
+
+.alessia_line_horizontal{
+    height: 1px;
+    width: 80%;
+    border-top: 2px dashed #cccccc;
+}
+
+#alessia_login{
+    background-color: #3b3b3b;
+    border: 1px outset #505050;
+    border-radius: 1em;
+    color: #cccccc;
+}
+
+#alessia_login:active{
+    border: 1px inset #505050;
+}
+
+#alessia_login:hover{
+    background-color: #4b4b4b;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+.material-icons.md-18{
+    font-size: 18px;
+}
+
+.material-icons.md-24{
+    font-size: 24px;
+}
+
+.material-icons.md-36{
+    font-size: 36px;
+}
+
+.material-icons.md-48{
+    font-size: 48px;
+}
+
+.material-icons.md-light{
+    color: blue;
+}
+

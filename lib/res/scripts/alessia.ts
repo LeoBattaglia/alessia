@@ -2,19 +2,25 @@
 const key_sid = "alessia_sid";
 const socket = new WebSocket("ws://localhost:8080");
 
+//Classes
+class DataObject{
+    //Declarations
+    command:string;
+
+    //Constructor
+    constructor(command:string){
+        this.command = command;
+    }
+}
+
 //Listeners
 socket.addEventListener("open", function(event){
     if(localStorage.getItem(key_sid) === null){
-        let data = {
-            command: "getSID"
-        };
-        socket.send(JSON.stringify(data));
+        send(new DataObject("getSID"));
     }else{
-        let data = {
-            command: "checkSID",
-            sid: localStorage.getItem(key_sid)
-        };
-        socket.send(JSON.stringify(data));
+        let data = new DataObject("checkSID");
+        data["sid"] = getSID();
+        send(data);
     }
 });
 
@@ -34,17 +40,37 @@ function execute(jsonObject:string):void{
             break;
         case "setSID":
             localStorage.setItem(key_sid, data.sid);
+            loadPage("index");
             break;
     }
 }
 
-function log_in():void{
-    let data = {
-        command: "login",
-        sid: localStorage.getItem(key_sid),
-        username: document.getElementById("alessia_username")["value"],
-        password: document.getElementById("alessia_password")["value"]
-    };
+function getSID():string{
+    return localStorage.getItem(key_sid)
+}
+
+function loadPage(page:string):void{
+    let data = new DataObject("loadPage");
+    data["sid"] = getSID();
+    data["page"] = page;
+    send(data);
+}
+
+function loadPanel(panel:string):void{
+    let data = new DataObject("loadPanel");
+    data["sid"] = getSID();
+    data["panel"] = panel;
+    send(data);
+}
+
+function logout(){
+    alert("LOGOUT");
+    let data = new DataObject("logout");
+    data["sid"] = getSID();
+    send(data);
+}
+
+function send(data){
     socket.send(JSON.stringify(data));
 }
 

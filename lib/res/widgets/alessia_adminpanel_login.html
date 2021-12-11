@@ -1,0 +1,34 @@
+<input id="alessia_username" class="alessia_input_text" name="username" type="text" placeholder="Username"
+       value="admin">
+<input id="alessia_password" class="alessia_input_text" name="password" type="password" placeholder="Password"
+       value="1234">
+<div style="margin-top: 0.3em;">
+    <widget name="alessia_button_admin">
+        name: sign-in-alt;
+        title: Login;
+        function: log_in();
+        size: 16;
+    </widget>
+</div>
+
+<script>
+    function log_in(){
+        let data = new DataObject("login");
+        data["sid"] = getSID();
+        data["username"] = document.getElementById("alessia_username")["value"];
+        data["password"] = document.getElementById("alessia_password")["value"];
+        send(data);
+    }
+
+    document.getElementById("alessia_username").addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            log_in();
+        }
+    });
+
+    document.getElementById("alessia_password").addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+            log_in();
+        }
+    });
+</script>

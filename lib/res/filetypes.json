@@ -1,6 +1,10 @@
 {
     "types":[
         {
+            "name":"css",
+            "type": "text/css"
+        },
+        {
             "name":"ico",
             "type": "image/x-icon"
         },

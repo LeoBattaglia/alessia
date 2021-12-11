@@ -2,6 +2,7 @@
 import * as config from "./lib/res/config.json";
 import {DB} from "dilara";
 import {Executor} from "./lib/executor";
+import * as func from "./lib/functions";
 import * as pkg from "./package.json";
 
 //Constants
@@ -12,15 +13,12 @@ const WS = require("ws");
 const websocketServer = new WS.Server({port: config.websocket_port});
 
 //Init DB
-let db:DB = new DB("localhost", "root", "Msql$10", "alessia");
-db.init("./lib/res/db.txt").then();
-
-//Init Builder
-builder.init();
+let db:DB = new DB(config.db_host, config.db_user, config.db_password, config.db_schema);
+db.init("./lib/res/db/db.txt").then();
 
 //Start Server
 server.init();
-server.addCommand(new Selina.Command("sessions", "Show Sessions", Executor.printSessions));
+server.addCommand(new Selina.Command("sessions", "Show Sessions", func.printSessions));
 server.startListener();
 server.start("Alessia-Framework " + pkg.version);
 

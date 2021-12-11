@@ -6,14 +6,14 @@ export class Session{
     //Declarations
     private admin:Boolean;
     private readonly sid:string;
-    private readonly timestamp:number;
+    private timestamp:number;
     private tries:number;
 
     //Constructor
     constructor(sid:string){
         this.admin = false;
         this.sid = sid;
-        this.timestamp = Date.now();
+        this.setTimestamp();
         this.tries = 0;
     }
 
@@ -40,6 +40,10 @@ export class Session{
 
     setAdmin(admin:Boolean):void{
         this.admin = admin;
+    }
+
+    setTimestamp():void{
+        this.timestamp = Date.now();
     }
 }
 
